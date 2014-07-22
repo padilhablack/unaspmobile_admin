@@ -24,8 +24,8 @@
             <h2 id="current_page" class="lead"></h2>
             <ul id="menu" class="nav nav-tabs ">
                 <li><a href="#pages/biblioteca.php" alt="Biblioteca">Biblioteca</a></li>
-                <li><a href="#notas.php" alt="Notas e Faltas">Notas e Faltas</a></li>
-                <li><a href="#financeiro.php" alt="Financeiro" >Financeiro</a></li>
+                <li><a href="#pages/notas.php" alt="Notas e Faltas">Notas e Faltas</a></li>
+                <li><a href="#pages/financeiro.php" alt="Financeiro" >Financeiro</a></li>
             </ul>
             <br>
             <div id="conteudo" class="conteudo"></div>
