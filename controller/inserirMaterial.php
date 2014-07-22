@@ -1,7 +1,6 @@
 <?php
 
-include './banco.php';
-// Se o usuário clicou no botão cadastrar efetua as ações
+require_once '../model/material.php';
 if (isset($_POST['enviar'])) {
 
     // Recupera os dados dos campos
@@ -12,10 +11,11 @@ if (isset($_POST['enviar'])) {
     $assunto = $_POST['assunto'];
     $editora = $_POST['editora'];
     $serie = $_POST['serie'];
-	$qntd = $_POST['quantidade'];
+    $qntd = $_POST['quantidade'];
     $foto = $_FILES["imagem"];
 
     // Se a foto estiver sido selecionada
+
     if (!empty($foto["name"])) {
 
         // Largura máxima em pixels
@@ -53,11 +53,23 @@ if (isset($_POST['enviar'])) {
 
             // Faz o upload da imagem para seu respectivo caminho
             move_uploaded_file($foto["tmp_name"], $caminho_imagem);
+            
+            //cria um novo material
+            $material = new Material();
 
+            $material->setTipo($tipo);
+            $material->setAutor($autor);
+            $material->setTitulo($titulo);
+            $material->setAno($ano);
+            $material->setAssunto($assunto);
+            $material->setEditora($editora);
+            $material->setFoto_nome($nome_imagem);
+            $material->setQuantidade($qntd);
+            $material->setSerie($serie);
+            
             // Insere os dados no banco
-            $sql = mysql_query("INSERT INTO `unaspmobile`.`material` (`idmaterial`, `tipo`, `autor`, `titulo`, `ano`, `data`, `assunto`, `editora`, `serie`, `quantidade`, `disponivel`, `foto`) VALUES (NULL, '" . $tipo . "', '" . $autor . "', '" . $titulo . "', '" . $ano . "', CURRENT_TIMESTAMP, '" . $assunto . "', '" . $editora . "', '" . $serie . "','".$qntd."', '0', '" . $nome_imagem . "')");
             // Se os dados forem inseridos com sucesso
-            if ($sql) {
+            if ($material->insertMaterial()) {
                 echo "<font color='green'>Você foi cadastrado com sucesso.</font>";
             }
         }
@@ -70,4 +82,3 @@ if (isset($_POST['enviar'])) {
         }
     }
 }
-?>

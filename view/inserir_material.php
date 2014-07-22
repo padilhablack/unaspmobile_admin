@@ -1,5 +1,5 @@
 <div style="width: 500px; margin-right: 99%;">
-    <form class="form-horizontal" id="myForm" action="classes/inserir_BD.php" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" id="myForm" action="controller/inserirMaterial.php" method="post" enctype="multipart/form-data">
         <fieldset>
             <!-- Form Name -->
             <legend>Cadastrar Livro</legend>
@@ -108,8 +108,6 @@
     <div id="message"></div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.form.js" type="text/javascript"></script>
 <script>
