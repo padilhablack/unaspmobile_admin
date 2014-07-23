@@ -1,12 +1,15 @@
 <?php
 
+require_once 'banco.php';
+
 class aluno {
+
     private $id;
     private $nome;
     private $senha;
-    
+
     public function getId() {
-        return $this->id;
+        return (INT) $this->id;
     }
 
     public function getNome() {
@@ -29,14 +32,22 @@ class aluno {
         $this->senha = $senha;
     }
 
-  public function selectAluno() {
-        $sql = "SELECT * FROM aluno ORDER BY nome";
-        $query = mysql_query($sql);
+    public function insereAluno() {
+        $sql = mysql_query("INSERT INTO aluno (`idAluno`, `nome`, `senha`) VALUES ('" . $this->getId() . "', '" . $this->getNome() . "', '" . $this->getSenha() . "');");
 
-        $array = array();
+        if ($sql) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function selectAluno() {
+        $sql = mysql_query("SELECT * FROM aluno ORDER BY nome");
+        $array = "";
         $cont = 0;
 
-        while ($resultado = mysql_fetch_assoc($query)) {
+        while ($resultado = mysql_fetch_assoc($sql)) {
             $array[$cont] = array(
                 "idAluno" => $resultado['idAluno'],
                 "nome" => $resultado['nome']
@@ -46,15 +57,15 @@ class aluno {
 
         return $array;
     }
-    
-       public function updateAluno() {
 
-        $sql = "UPDATE `aluno` SET "
-                . " nome ='".$this->getNome()."',"
-                . " senha = '".$this->getSenha()."' "
-                . "WHERE idAluno = ".$this->getId()."";
+    public function updateAluno() {
 
-        if (mysql_query($sql)) {
+        $sql = mysql_query("UPDATE `aluno` SET "
+                . " nome ='" . $this->getNome() . "',"
+                . " senha = '" . $this->getSenha() . "' "
+                . "WHERE idAluno = " . $this->getId());
+
+        if ($sql) {
 
             return true;
         } else {
@@ -62,10 +73,17 @@ class aluno {
             return false;
         }
     }
-    
-    public function deleteAluno(){
-        $sql = "DELETE FROM  aluno  WHERE "
-             . "WHERE idAluno = ".$this->getId()."";
+
+    public function deleteAluno() {
+        $sql = mysql_query("DELETE FROM  aluno WHERE idAluno = ".$this->getId());
+
+        if ($sql) {
+
+            return true;
+        } else {
+
+            return false;
+        }
     }
-    
+
 }

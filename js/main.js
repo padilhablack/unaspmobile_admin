@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    
     var carregar = $(".conteudo"),
             li = $('.nav li');
 
